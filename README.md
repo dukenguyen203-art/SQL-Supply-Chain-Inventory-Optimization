@@ -2,9 +2,16 @@
 *Inventory Optimisation - Forecast Accuracy - Operational Insights*
 
 ## Overview
-This project develops a complete SQL analytics environment to diagnose and optimize supply chain performance using daily operational data. It reproduces an end-to-end analytics process commonly found in real enterprise systems - transforming raw transactional data into structured insights, operational KPIs, risk scoring, and segmentation models.
+This project builds a complete SQL analytics environment to diagnose and optimise supply chain performance using daily operational data. It reproduces an end-to-end analytics workflow commonly found in enterprise systems—transforming raw transactional data into structured insights, operational KPIs, and portfolio-level optimisation signals.
 
-The project emphasizes business analysis supported by strong SQL engineering, and demonstrates how technical systems can enable clear, data-driven decision making.
+The project blends business analysis with strong SQL engineering, demonstrating how technical systems support clear, data-driven decisions.
+
+## Project Objectives
+- Build a fully structured SQL analytics environment for supply chain optimisation.
+- Diagnose forecast accuracy, inventory efficiency, supplier reliability, and warehouse performance.
+- Transform raw operational data into actionable KPIs, risk indicators, and planning insights.
+- Demonstrate scalable SQL engineering practices used in real enterprise analytics systems.
+- Provide a repeatable framework for decision support across procurement, planning, and operations.
 
 ## Analytical Framework
 The analysis focuses on 10 core executive-level business questions, covering:
@@ -15,29 +22,26 @@ The analysis focuses on 10 core executive-level business questions, covering:
 * Supplier Performance
 
 **Full analysis:**
+- [04_analysis/analysis_report.md](04_analysis/analysis_report.md)
 
 **Supporting SQL queries:**
+- [04_analysis/queries](04_analysis/queries)
 
 ## Dataset Summary
-This project uses the **High-Dimensional Supply Chain Inventory Dataset**, which simulates real-world operations with daily, SKU-level data capturing sales, inventory levels, supplier lead times, replenishment behavior, regional distribution, and promotional effects.
+This project uses the High-Dimensional Supply Chain Inventory Dataset, a realistic simulation of daily SKU-level operations, including sales, inventory movements, replenishment behaviour, supplier lead times, and promotional effects.
 * [High-Dimensional Supply Chain Inventory Dataset](https://www.kaggle.com/datasets/ziya07/high-dimensional-supply-chain-inventory-dataset)
 
-Key fields:
-Key Features
-- Date: Daily timestamps spanning one year of activity.
-- SKU-Level Detail: Unique product identifiers with varying demand patterns.
-- Warehouse and Region: Spatial dimensions representing distribution networks.
-- Units Sold: Simulated sales data with seasonal trends and random noise.
-- Inventory Levels: Dynamic on-hand stock that evolves over time.
-- Supplier Lead Times: Variable delivery delays for replenishment orders.
-- Reorder Points and Quantities: Inventory policy thresholds and simulated replenishments.
-- Promotions: Binary indicator of promotional periods influencing demand.
-- Stockout Events: Flags indicating when demand exceeds available inventory.
-- Supplier Information: Links products to specific suppliers with unique lead times.
-- Cost and Price: Realistic unit costs and selling prices with profit margins.
-- Forecasted Demand: Approximate prediction values reflecting planning estimates.
+Key Features:
+- Daily timestamps across one year
+- SKU-level detail with varied demand patterns
+- Multi-warehouse, multi-region distribution
+- Units sold, promotions, and stockout indicators
+- Dynamic inventory levels and replenishment logic
+- Supplier lead-time variability
+- Unit cost, selling price, and revenue
+- Forecasted demand for accuracy evaluation
 
-The dataset provides a complete base for evaluating operational efficiency across time and across product, warehouse, and supplier dimensions.
+The dataset provides a rich base for analysing operational efficiency across product, warehouse, and supplier dimensions.
 
 # Project Workflow
 1. Schema & Data Architecture
@@ -76,61 +80,81 @@ The dataset provides a complete base for evaluating operational efficiency acros
   - ABC–XYZ strategic portfolio segmentation
 
 Full analysis is stored in:
-- /04_analysis/analysis_report.md
+- [04_analysis/analysis_report.md](04_analysis/analysis_report.md)
+
+## Deliverables
+- SQL Database Schema (fact/dimension model, staging layer, indexing)
+- ETL Pipeline & Data Quality Checks (automated loading + validation scripts)
+- Analytics Layer (Views) supporting monthly forecasting, inventory, supplier, and warehouse KPIs
+- Reusable Analytical Components
+  - ABC–XYZ classification function
+  - Executive KPI stored procedure
+- 10-Theme Insight Report addressing forecasting, inventory, supplier, product, and warehouse questions
+- Documentation including structured analysis, query library, folder hierarchy, and README
 
 ## Technical Skills Demonstrated
 - Data Engineering
-  - Dimensional modeling (fact–dimension)
-  - Bulk loading & ETL pipelines
-  - Data type enforcement, QC checks, cleansing
-  - Star schema design with DateKey
-  - Performance tuning with nonclustered indexes
+  - Dimensional modelling (fact–dimension)
+  - ETL pipeline construction & QC checks
+  - Indexing and performance tuning
 - Analytical SQL
-  - Window functions (SUM OVER, STDEV, PERCENTILE_RANK)
-  - Time-based rollups (weekly/monthly aggregation)
-  - Forecast accuracy metrics (MAPE, WAPE)
-  - DOH, turnover, volatility calculations
-  - ABC and XYZ classification logic
+  - Window functions, aggregations, roll-ups
+  - Forecast metrics: WAPE, MAPE
+  - Inventory KPIs: DOH, Turnover, Volatility
+  - ABC–XYZ classification logic
 - Procedures & Functions
   - Table-valued functions
-  - Stored procedures with runtime parameters
-  - Reusable analytics via modular SQL components
+  - Parameter-driven stored procedures
+  - Modular analytical components
 ##  Key Insights
+- Forecast accuracy weakens in the second half of the year, especially Aug–Nov, leading to rising WAPE and increased reliance on inventory buffers.
+- Demand volatility is moderate and consistent across SKUs, meaning revenue contribution—not variability—is the key driver for prioritisation.
+- Inventory distribution is uneven across the network, with several warehouses holding 30–45% above or below the network average for the same SKU in the same month.
+- Slow-moving stock accumulates, with DOH frequently exceeding 60–75 days, tying up significant working capital.
+- Supplier lead-time variability is universally high, not concentrated in a small subset, increasing systemic supply risk.
+- Warehouses show recurring seasonal surges, indicating predictable but unmodelled peak periods.
+- Revenue and consumption value are broadly distributed, with no extreme concentration—most SKUs and suppliers contribute meaningfully to financial outcomes.
+
+## Recommendations
+- Implement a mid-year reforecast cycle to address rising WAPE and shifting demand patterns.
+- Prioritise high-volume, high-WAPE SKUs for forecast and service-level improvements, since the portfolio lacks a small “critical top tier.”
+- Stabilise supplier lead times, as variability is widespread and inflates safety stock requirements.
+- Optimise inventory distribution across warehouses, using imbalance metrics to lift service while reducing excess.
+- Design replenishment policies that scale across a wide SKU portfolio, since low-impact items are limited.
+- Introduce seasonal uplifts into forecasting, especially for warehouses with consistent demand peaks.
+
 ## Folder structure
 - /data/                               → Raw dataset
 - /01_schema/                          → DB, schema, tables, indexes
 - /02_etl_and_quality_check/           → Import, staging, DimDate, Fact load, QC
 - /03_views/                           → Semantic/analytics layer
 - /04_analysis/
-      - analysis_report.md           → Full analysis
+      - analysis_report.md             → Full analysis
       - /queries/                      → SQL files per business question
+      - analysis_report.md
 - /05_functions_stored_procedures/     → ABC–XYZ & KPI components
 - /README.md/
+
 ## Setup Instructions
-**Configure dataset path**
-
-Update the file path in:
-`02_etl_and_quality_check/01_import_raw_data.sql`
-
-**Execute in the following order**
-1. `/01_schema/`
-2. `/02_etl_and_quality_check/`
-3. `/03_views/`
-4. `/05_functions_stored_procedures/`
-5. `/04_analysis/` (read only)
+1. Configure dataset path**
+  - Update the file path in: `02_etl_and_quality_check/01_import_raw_data.sql`
+2. Execute in the following order**
+  1. `/01_schema/`
+  2. `/02_etl_and_quality_check/`
+  3. `/03_views/`
+  4. `/05_functions_stored_procedures/`
+  5. `/04_analysis/` (read only)
 
 ## Conclusion
-This project demonstrates how SQL can be used to build a complete analytical environment for supply chain operations.
+This project demonstrates how SQL can be used to build a robust analytical environment for supply chain operations, integrating:
+- Dimensional modelling
+- ETL & quality checks
+- Analytical views
+- Segmentation logic
+- Executive KPIs
+- Structured business insights
 
-It integrates:
-- dimensional modeling
-- ETL & data quality
-- analytical views
-- segmentation logic
-- executive KPIs
-- structured business insights
-
-Resulting in a robust, scalable, and transparent analytics solution.
+The result is a scalable, transparent, and end-to-end framework for supply chain decision support.
 
 ## Author
 Duke Nguyen
