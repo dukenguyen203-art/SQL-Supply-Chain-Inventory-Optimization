@@ -1,5 +1,6 @@
 # SQL Supply Chain Inventory Optimisation
 *Inventory Optimisation - Forecast Accuracy - Operational Insights*
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/c19896ef-fdea-41b6-bab1-90f9221442b4" />
 
 ## Overview
 This project builds a complete SQL analytics environment to diagnose and optimise supply chain performance using daily operational data. It reproduces an end-to-end analytics workflow commonly found in enterprise systems—transforming raw transactional data into structured insights, operational KPIs, and portfolio-level optimisation signals.
