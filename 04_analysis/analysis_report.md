@@ -128,12 +128,13 @@ References:
 - Result File: [`results/Q7 Supplier Lead Time Variability.csv`](./results)
  
 #### 3.2 Supplier ABC (Consumption Value)
-Consumption value is concentrated across a small number of suppliers:
-- A-class: first 8 suppliers (~74% of value)
-- B-class: SUP_7 (large and highly variable)
-- C-class: SUP_8 (still large in value)
+Supplier consumption value is evenly spread, not dominated by a small few:
+- A-class includes 8 of 10 suppliers
+- B- and C-class suppliers still carry substantial value
+- Lead-time variability is high across all classes
 
-This means supplier risk is tightly concentrated: the biggest suppliers are also among the most variable.
+Key insight:
+Supplier dependency and risk are broadly distributed, meaning stability issues must be tackled across the supplier base, not just with a small subset.
 <img width="1300" height="509" alt="image" src="https://github.com/user-attachments/assets/94dee41b-4b27-48b5-8c5a-d8d20a2f1080" />
 
 References:
@@ -164,13 +165,13 @@ References:
 Revenue contribution varies widely, even though volumes do not.
 
 #### 5.1 ABC Classification
-About 74% of SKUs (37 out of 50) fall into A-class, contributing ~80% of revenue.
-C-class is small (only 4 SKUs) and low-impact, making these prime candidates for simplified stocking.
+Revenue is not highly concentrated:
+- ~37 out of 50 SKUs fall into A-class. This group reaches ~80% of total revenue
+- B- and C-class items are few and only modestly smaller in value
 
-Because demand volatility is uniform (Y-class), the strongest differentiator becomes:
-- Revenue importance (ABC)
-- Forecast behaviour (WAPE, bias)
-- Inventory performance (DOH, slow movers)
+Key insight:
+The portfolio is broadly important — most SKUs contribute meaningfully to revenue.
+There is no long tail of “trivial” SKUs that can be deprioritised.
 <img width="917" height="971" alt="image" src="https://github.com/user-attachments/assets/25c70d7d-1936-4c15-b57e-416e20530119" />
 
 References:
@@ -179,17 +180,17 @@ References:
  
 ## Integrated Insights
 Across all dimensions, the data paints a consistent picture:
-- Forecast accuracy weakens later in the year, while inventories rise.
-- Inventory is not optimally distributed, creating both overstock and stockout risks.
-- Supplier lead-time variability forces higher safety stock and contributes to volatility.
-- Warehouse demand patterns are seasonal, yet forecasts and replenishment do not fully account for it.
-- SKU importance is driven by revenue, not volume, emphasising the need for ABC-based planning.
+- Forecasts deteriorate later in the year, and the network compensates with higher inventory.
+- Inventory distribution is uneven, not demand-aligned, creating both overstock and understock pockets.
+- Supplier variability is systemic, not isolated — safety stock requirements are structurally elevated.
+- Demand surges follow seasonal patterns that are predictable but not fully modelled.
+- Portfolio importance is broad; planning improvements must scale across many SKUs, not just a small top tier
 
 ## Improvement Opportunities (High-Level)
-A few practical steps emerge from the analysis:
-- Introduce a mid-year reforecasting cycle for A-class items.
-- Establish a slow-mover watchlist (DOH > 60 days).
-- Stabilise replenishment patterns for volatile SKUs.
-- Use network balance dashboards to guide stock transfers and prevent unnecessary POs.
-- Work with high-variability suppliers to tighten delivery windows or adjust safety stock policies.
-- Apply ABC–CV logic to allocate planning effort and set differentiated service levels.
+- Introduce mid-year reforecasting to counter rising second-half forecast error.
+- Prioritise high-WAPE and high-volume SKUs, since revenue is widely distributed.
+- Build a slow-mover watchlist (DOH > 60 days) and adjust replenishment parameters.
+- Stabilise ordering behaviour to reduce volatility and DOH inflation.
+- Strengthen supplier reliability programs across the entire supplier base.
+- Use network-balance dashboards to rebalance stock before issuing new POs.
+- Incorporate seasonal uplift logic into forecasting for key warehouses.
