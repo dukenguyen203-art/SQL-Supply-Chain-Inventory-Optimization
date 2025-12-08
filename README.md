@@ -129,11 +129,11 @@ Full analysis is stored in:
 - /02_etl_and_quality_check/           → Import, staging, DimDate, Fact load, QC
 - /03_views/                           → Semantic/analytics layer
 - /04_analysis/
-      - analysis_report.md             → Full analysis
-      - /queries/                      → SQL files per business question
-      - analysis_report.md
-- /05_functions_stored_procedures/     → ABC–XYZ & KPI components
-- /README.md/
+  - analysis_report.md → Full analysis
+  - /queries/ → SQL files per business question theme
+  - /results/ -> CSV files per business question
+- /05_functions_stored_procedures/ → ABC–XYZ & KPI components
+- README.md
 
 ## Setup Instructions
 1. Configure dataset path**
